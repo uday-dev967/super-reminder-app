@@ -13,6 +13,6 @@
 9. API FOR GETTING TODO OF A SPECIFIC AUTHENTICATED USER
 10. API FOR UPDATING TODO STATUS OF A SPECIFIC AUTHENTICATED USER
 
-# reiminder-app for frontend
+# reminder-app for frontend
 1. It contains README.md file which show how the app works please go through it
 
