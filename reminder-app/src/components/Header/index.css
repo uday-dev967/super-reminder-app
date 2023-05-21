@@ -1,0 +1,125 @@
+.header-main-container {
+    position: static;
+    top: 10vh;
+}
+.header-back-container{
+    background-color: #363636;
+    padding: 0px;
+}
+
+.app-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.search-container {
+    padding: 5px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: white;
+    background-color: white;
+    margin-right: 20px;
+}
+
+
+
+
+
+.search-button {
+    border-style: solid;
+    border-width: 0px 0px 0px 3px;
+    background-color: transparent;
+}
+
+
+.nav-links-container {
+    display: flex;
+    align-self: center;
+    width : 80%;
+    justify-content: space-around;
+}
+
+.nav-links-md-container{
+    display: none;
+    align-self: center;
+    width : 50%;
+    justify-content: space-around;
+}
+
+
+
+@media screen and (max-width : 580px) {
+
+    .app-icon {
+        width: 44px;
+        height: 44px;
+    }
+    
+}
+
+
+.header-title{
+    color : pink;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px 10px 0 10px;
+    align-self: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.active {
+    color : orange;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px 10px 0 10px;
+    align-self: center;
+    padding : 0px;
+    text-decoration: none;
+}
+
+.pending {
+    color : orange;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px 10px 0 10px;
+    align-self: center;
+    padding : 0px;
+    text-decoration: none;
+}
+
+.nav-link{
+    align-self: center;
+    margin-top: 0px;
+    padding-top : 0px;
+}
+
+@media screen and (min-width : 500px) {
+    .nav-links-container {
+        width: 55%;
+    }
+}
+
+@media screen and (min-width : 767px) {
+    .nav-links-md-container {
+        display : flex;
+        width: 85%;
+    }
+    .nav-links-container {
+        display: none;
+    }
+}
+
+@media screen and (min-width : 850px) {
+    .nav-links-md-container {
+        display : flex;
+        width: 70%;
+    }
+}
+
+@media screen and (min-width : 900px) {
+    .nav-links-md-container {
+        display : flex;
+        width: 60%;
+    }
+}

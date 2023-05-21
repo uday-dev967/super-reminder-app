@@ -1,0 +1,98 @@
+.home-container{
+    height: 90vh;
+}
+
+.reminder-adder-conatainer{
+    border: solid pink 2px;
+    border-radius: 10px;
+    padding : 15px;
+    margin: 1px;
+}
+
+.label-home{
+    font-size:20px;
+    margin-right: 10px;
+}
+
+.input-width {
+    width: 245px;
+}
+
+.label-input-home{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-home{
+    border : solid pink 2px;
+    border-radius: 7px;
+}
+
+.add-button-home {
+    padding: 5px;
+    background-color: pink;
+    color : white;
+    border-style: none;
+    border-radius: 7px;
+    margin-left: 10px;
+    width : 100px;
+    margin-top : 5px;
+}
+
+.user{
+    color : pink;
+    font-weight: 600;
+}
+
+.list-item-home{
+    border: solid gray 2px;
+    padding : 10px;
+    margin : 2px;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.home-ul {
+    padding : 0px;
+    list-style-type: none;
+    height: 60vh;
+    overflow: auto;
+    margin-bottom: 3px;
+}
+
+.reminder-task {
+    width: 70%;
+}
+
+.done-button  {
+    color : white;
+    background-color: pink;
+    border-style: none;
+    border-radius: 7px;
+    padding : 10px;
+    margin : none;
+    
+}
+
+.height{
+    height: 35vh;
+    text-align: center;
+    color : pink;
+}
+
+
+@media screen and (min-width : 576px) {
+    .home-ul{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .home-container{
+        padding: 20px;
+    }
+}
+
+@media screen and (max-height : 700px) {
+    .home-ul {
+        height: 44vh;
+    }
+}

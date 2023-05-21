@@ -1,0 +1,19 @@
+.rem-ul {
+    padding : 0px;
+    list-style-type: none;
+    height: 85vh;
+    overflow: auto;
+    margin: 0px 0px 3px 0px;
+    
+}
+
+.reminder-time{
+    align-self: center;
+}
+
+@media screen and (min-width : 576px) {
+    .rem-ul{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,48 @@
+
+
+.form-bg-container {
+    background-image: url("https://img.freepik.com/premium-photo/3-o-clock-sea-blue-office-wall-clock-3d-illustration_394271-963.jpg");
+    background-size: cover;
+}
+
+.input{
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    color : white;
+}
+
+.login-tag{
+    cursor: pointer;
+}
+
+.main-form-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.register-form-container{
+    width: 100%;
+}
+
+@media screen and (min-width : 520px) {
+    .register-form-container{
+        width: 80%;
+    }
+}
+
+@media screen and (min-width : 767px) {
+    .register-form-container{
+        width: 70%;
+    }
+}
+
+@media screen and (min-width : 926px) {
+    .register-form-container{
+        width: 90%;
+    }
+}
+
