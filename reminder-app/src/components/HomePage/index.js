@@ -13,9 +13,13 @@ const apiStatusConstants = {
     failure: "FAILURE",
 };
 
+const apiBaseUrl = "http://localhost:3001"
+const clearList = []
+
 class HomePage extends Component {
   state = {remindersApiRes : {status: apiStatusConstants.initial,data: null,errorMsg: null},alertdList: [],userReminder:"",userTime : ""}
    
+  
 
   onchangeUserReminder = (e) => {
   this.setState({userReminder : e.target.value})
@@ -25,6 +29,9 @@ class HomePage extends Component {
     this.setState({userTime : e.target.value})
   }
 
+
+
+  
 
   onClickAdd = async() => {
       const {userReminder,userTime} = this.state
@@ -38,7 +45,7 @@ class HomePage extends Component {
         const jwtToken = Cookies.get("jwt_token")
         
         console.log(userReminder, userTime)
-        const url = "http://localhost:3001/make-reminder"
+        const url = `${apiBaseUrl}/make-reminder`
         const option = {
           method : "POST",
           headers : {
@@ -52,7 +59,8 @@ class HomePage extends Component {
           alert(`${userReminder} added succesfully`)
           const neRem = {id,reminder:userReminder,time:userTime,status : "peding"}
           const timeDiff = new Date(userTime) - new Date()
-          setTimeout(() => {
+          console.log(timeDiff)
+          const timerId = setTimeout(() => {
             const {remindersApiRes} = this.state 
             const {data} = remindersApiRes
             const {reminders} = data
@@ -60,6 +68,7 @@ class HomePage extends Component {
               ...prev.remindersApiRes,data : {...prev.remindersApiRes.data, reminders : [...reminders, neRem]}
             }}))
           },timeDiff)
+          clearList.push(timerId)
         }
         else {
           alert("OOPS! Something Went Wrong")
@@ -78,7 +87,7 @@ class HomePage extends Component {
       errorMsg: null,}
     }));
     const jwtToken = Cookies.get("jwt_token")
-    const url = `http://localhost:3001/my-reminders`;
+    const url = `${apiBaseUrl}/my-reminders`;
     const option = {
       method : "GET",
       headers : {
@@ -92,13 +101,28 @@ class HomePage extends Component {
       
       const {reminders,user} = responseData
       
-      const newReminders = reminders.filter(each => each.status === "pending")
-      const currData = {reminders : newReminders, user}
+      const newPastReminders = reminders.filter(each => each.status === "pending" && (new Date(each.time) - new Date()) <= 0 )
+      const currData = {reminders : newPastReminders, user}
       this.setState((prevState) => ({
         remindersApiRes : {...prevState.remindersApiRes,
         status: apiStatusConstants.success,
         data: currData,}
       }));
+      
+      const newFutureReminders = reminders.filter(each => each.status === "pending" && (new Date(each.time) - new Date()) > 0 )
+      newFutureReminders.forEach(each => {
+        const timeDiff = new Date(each.time) - new Date()
+        const {remindersApiRes} = this.state
+        const {data} = remindersApiRes
+        const {reminders} = data
+        const clearTimerId = setTimeout(() => {
+          this.setState(prev => ({remindersApiRes : {
+            ...prev.remindersApiRes,data : {...prev.remindersApiRes.data, reminders : [...reminders, each]}
+          }}))
+        },timeDiff)
+        clearList.push(clearTimerId)
+      })
+    
       
     } else {
       this.setState((prevState) => ({
@@ -113,7 +137,7 @@ class HomePage extends Component {
     const reminderId = e.target.id
     console.log(reminderId)
     const jwtToken = Cookies.get("jwt_token")
-    const url = `http://localhost:3001/reminders-update/${reminderId}`;
+    const url = `${apiBaseUrl}/reminders-update/${reminderId}`;
     const option = {
       method : "PUT",
       headers : {
@@ -142,6 +166,11 @@ class HomePage extends Component {
         console.log("component")
     }
 
+    componentWillUnmount() {
+      clearList.forEach(each => clearTimeout(each))
+    }
+
+
   renderLoadingView = () => (
         <LoadingViewContainer>
           <Loader type="ThreeDots" color="pink" height="50" width="50" />
@@ -152,6 +181,7 @@ class HomePage extends Component {
         const {remindersApiRes, userReminder,userTime,alertdList} = this.state
         const {data} = remindersApiRes
         const {user,reminders} = data
+        console.log("user reminders", reminders)
         let renderReminders = reminders.filter(each => (
           alertdList.every(eachAlrt => eachAlrt.id !== each.id)
         ))
